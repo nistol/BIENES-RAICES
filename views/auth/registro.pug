@@ -14,12 +14,13 @@ block contenido
         div.mt-8.mx-auto.max-w-md
             div.bg-white.py-8.px-4.shadow.rounded-md
                 form(method="post" action="/auth/registro")
+                    input(type="hidden" name="_csrf" value= csrfToken)
                     div 
                         label.block.text-sm.uppercase.text-gray-500.mb-4.font-bold Tu nombre
                         input#nombre.w-full.px-3.py-1.border.border-grey300.rounded-md.placeholder-gray-400(placeholder="Tu Nombre" type="text" name="nombre" value = usuario ? usuario.nombre: '')
                     div
                         label.block.text-sm.uppercase.text-gray-500.mb-4.font-bold.mt-4 Tu Email
-                        input#password.w-full.px-3.py-1.border.border-grey300.rounded-md.placeholder-gray-400(placeholder="Tu Email" type="email" name="email" value = usuario ? usuario.email:'')
+                        input#email.w-full.px-3.py-1.border.border-grey300.rounded-md.placeholder-gray-400(placeholder="Tu Email" type="email" name="email" value = usuario ? usuario.email:'')
                     div 
                         label.block.text-sm.uppercase.text-gray-500.mb-4.font-bold.mt-4 Tu contraseña
                         input#password.w-full.px-3.py-1.border.border-grey300.rounded-md.placeholder-gray-400(placeholder="Tu contraseña" type="password" name="password")

@@ -29,5 +29,33 @@ const emailRegistro = async (datos) => {
         
     })
 }
+const emailRecuperar = async (datos) => {
+  const transport = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: process.env.EMAIL_PORT,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+  const {email,nombre,token} = datos
 
-export {emailRegistro}
+  // enviar mail
+
+  await transport.sendMail({
+      from: 'BienesRaices.com',
+      to: email,
+      subject:'Restablece tu Password en BienesRaices.com',
+      text: 'Restablece tu Password en BienesRaices.com',
+      html: `
+      <p>${nombre} , Haz solicitado reestablecer tu password  en BienesRaices.com</p>
+      
+      <p>Sigue el siguiente enlace para generar un password nuevo:
+      <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3000}/auth/recuperar/${token}">Reestablecer Password</a></p>
+      
+      <p>Si tu no no solicitaste el cambio ignora el mensaje</p>`
+
+      
+  })
+}
+export {emailRegistro,emailRecuperar}
